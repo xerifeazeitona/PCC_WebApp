@@ -2,9 +2,12 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
+    <p><i>Author: <b>{{ post.author }}</b></i></p>
     <p><i>Posted on: {{ post.date_added|date:'M d, Y H:i' }}</i></p>
     <p>{{ post.text|linebreaks }}</p>
-    <p>
-        <a href="{% url 'blogs:edit_post' post.id %}">Edit post</a>
-    </p>
+    {% if post.author == user %}
+        <p>
+            <a href="{% url 'blogs:edit_post' post.id %}">Edit post</a>
+        </p>
+    {% endif %}
 {% endblock content %}
